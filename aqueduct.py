@@ -18,13 +18,14 @@ TestCases/Example1/grid.txt
 TestCases/TestCase1/grid.txt
 TestCases/TestCase2/grid.txt
 """
-File = open("TestCases/TestCase1/grid.txt", "r")
+File = open("grid.txt", "r")
 Lines = File.readlines()
 
 GridSize = importer.ImportGridSize(Lines[0])
 StationsToVisit = []
 
 iLine = 1
+print("---Begin importing station nodes---")
 while iLine <= GridSize[0]:
     line = Lines[iLine]
     line = line.replace(" ", "")
@@ -32,6 +33,9 @@ while iLine <= GridSize[0]:
     importer.ImportGrid(line, Nodes)
     iLine += 1
 
+
+"""Assumes Start Station and at least 1 End Station"""
+print("---Begin importing Supply Stations---")
 StationsToVisit.append(importer.ImportStations(Lines[iLine]))
 iLine += 1
 

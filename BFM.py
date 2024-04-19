@@ -9,7 +9,9 @@ def BFM(grid, start, end):
     """print("Bellman-Ford-Moore")"""
 
     numVertexes = int(grid.sizeX) * int(grid.sizeY)
-    #distanceStart = copy.deepcopy(grid.vertexes)
+    """Number of Edges in a M by N graph = (m-1)n + (n-1)m 
+       I multiply this by 2 as each (x,y) vertex has 2 edges to an adjacent vertex based on heights"""
+    numEdges = int(((int(grid.sizeX) - 1) * int(grid.sizeY)) + ((int(grid.sizeY) - 1) * int(grid.sizeX))) * 2
 
     # int distance to end vertex
     distanceList = []
@@ -26,7 +28,7 @@ def BFM(grid, start, end):
     distanceList[CoordinateToInt(grid, end)] = 0
 
     operations = 1
-    while operations < numVertexes:
+    while operations < numEdges - 1:
         update = False
         """
         checks edges up, down, left, right

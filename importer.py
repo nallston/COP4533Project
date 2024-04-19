@@ -19,7 +19,7 @@ def ImportGridSize(Line1):
     GridSize.append(int(int(x) * int(y)))
     GridSize.append(int(x))
     GridSize.append(int(y))
-    print(x + " + " + y + "Grid Lines = " + str(int(x) * int(y)))
+    print("Dimensions: x=" + x + " " + "y=" + y + "Grid Lines = " + str(int(x) * int(y)))
     return GridSize
 
 

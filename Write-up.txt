@@ -1,0 +1,49 @@
+Nathan Allston
+UFID: 7328-6111
+
+py ./aqueduct.py
+
+Write-up:
+    Definitions:
+        Grid = 2d object containing a Vertex at [x][y] coordinate.
+        Vertex = object created to represent a station, contains x, y, height
+        BFM is the function that preforms Bellman-Ford-Moore over the grid from a starting vertex to the destination vertex. Returns Time
+            BFM contains functions to translate an x,y location to a List index and vice versa. EX: 0,19 in a 20X20 grid -> 380
+            EdgeTime (V,V`) = max(-1, 1 + (height(v`) - height(V)))
+        Pathfinder contains the functions that handle the recursion
+            MinimumDistance is what aqueduct calls, takes in Grid, List of Stations that supply, with Stations[0] being the starting vertex. Returns Minimum cost supply path: 113
+            BFMRecursion is the recursive function. Takes in Grid, List of Stations, Starting Station. Returns minTime
+                If Stations does not contain a Station, returns 0.
+                For every Vertex in Stations -> Create a new Grid, a new Stations List, a new Starting Vertex = to current destination Vertex that is removed from new Station List.
+                Calculate newTime of choosing this Path and BFMRecursion of new start Station and remaining Stations
+                if newTime is the lowest path time set minTime = newTime
+            returns minTime
+    Formal Recursion Description:
+        Vertex: V, Stations: B, Grid: G, Current vertex location = S, Destination Vertex: D
+        OPT(G, B, S) = min( BFM(G, B, D) + OPT(G, B=(B-D), S=(B-D)))
+                for each V in B -> D
+        Instead of infinity I used 1500000 as a substitute to avoid Overflow
+
+Description:
+    The solution I made for this dynamic programming problem looks at every possible sequence of stations to visit
+    and computes the minimum time for each of these paths. It returns the minimum cost path.
+Notes:
+    I was planning to implement a global array that would store the shortest path from V => V` and have it so BFM would not run if this is already calculated.
+    Another plan I wanted to experiment with is for Stations[] array to be populated by checking supply stations not visited in the Grid.
+        This would allow supply stations passed through on a shortest path iteration to be removed from the ToVisit station list.
+    If these two could be implemented correctly the runtime would be reduced dramatically, however, the space required would be increased.
+
+
+Time Complexity:
+    My implementation of Bellman-Ford-Moore runs in 0(mn) time.
+         m = Vertexes in Grid
+         n = edges in Grid
+            Number of Edges in an X by Y graph = (X-1)Y + (Y-1)X
+            I multiply this by 2 as each (x,y) vertex has 2 edges to an adjacent vertex based on heights
+         Note: This BFM terminates once no successor pointer is updated, and the upperbound should be something much lower as in my testing the highest iteration count I got to was 65 in the 50,50 grid
+    The Recursive Algorithm
+        b = (number of supply stations - 1(starting station))
+        Runs BFM an amount of times equaling to the summation  i=1 to b  =>  b! / (b - i)! EX: 6 stations, b = 5 Runs (1->5 SUM( (5!) / (5-i)!) = 325
+
+    Overall Time Complexity is:
+        0( m * n * SUM(b! / (b - i)!) with b = supply stations - 1, and SUM is (i = 1 => b)
