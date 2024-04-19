@@ -1,5 +1,3 @@
-import time
-import BFM
 import Grid
 import Pathfinder
 import importer
