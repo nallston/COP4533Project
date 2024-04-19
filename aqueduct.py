@@ -23,14 +23,14 @@ GridSize = importer.ImportGridSize(Lines[0])
 StationsToVisit = []
 
 iLine = 1
-print("---Begin importing station nodes---")
+print("\n---Begin importing station nodes---")
 while iLine <= GridSize[0]:
     line = Lines[iLine]
     line = line.replace(" ", "")
     line = line.replace("\n", "")
     importer.ImportGrid(line, Nodes)
     iLine += 1
-
+print("---Finished importing station nodes---\n")
 
 """Assumes Start Station and at least 1 End Station"""
 print("---Begin importing Supply Stations---")
@@ -48,7 +48,7 @@ i3 = 0
 while i3 < len(StationsToVisit):
     print(StationsToVisit[i3].x, StationsToVisit[i3].y, StartStation.height, StationsToVisit[i3].visited)
     i3 += 1
-
+print("---Finished importing Supply Stations---\n")
 print("---Begin Algorithm---")
 minTime = Pathfinder.MinimumDistance(newGrid, StationsToVisit)
 print("Minimum cost supply path:", minTime)

@@ -48,8 +48,8 @@ def ImportGrid(line, Nodes):
 
     newVertex = Grid.Vertex(int(x), int(y), int(height), False)
     Nodes[int(x)][int(y)] = newVertex
-    print("At (" + str(Nodes[int(x)][int(y)].x) + "," + str(Nodes[int(x)][int(y)].y) + ") height = " + str(
-        Nodes[int(x)][int(y)].height) + " Visited = " + str(Nodes[int(x)][int(y)].visited))
+    """print("At (" + str(Nodes[int(x)][int(y)].x) + "," + str(Nodes[int(x)][int(y)].y) + ") height = " + str(
+        Nodes[int(x)][int(y)].height) + " Visited = " + str(Nodes[int(x)][int(y)].visited))"""
 
 
 def ImportStations(line):
