@@ -14,7 +14,7 @@ def MinimumDistance(grid, Stations):
     minTime = 15000000
 
     minTime = BFMRecursion(grid, Stations, startStation)
-    print("BFMCount =", BFMCount)
+    #print("BFMCount =", BFMCount)
     return minTime
 
 
