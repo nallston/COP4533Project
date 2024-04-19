@@ -1,9 +1,4 @@
-class GridPath:
-    def __init__(self, grid):
-        self.grid = grid
-        self.width = len(grid)
-        self.height = len(grid[0])
-        self.visited = [False in range(self.width * self.height)]
+"""Class Objects I made for the grid and vertexes that populate it"""
 
 class Grid:
     def __init__(self, sizeX, sizeY, vertexes, startStation):
@@ -21,24 +16,6 @@ class Vertex:
         self.x = x
         self.y = y
         self.height = height
-        self.visited = visited
-
-    def getX(self):
-        return self.x
-
-    def getY(self):
-        return self.y
-
-    def getHeight(self):
-        return self.height
-
-    def getVisited(self):
-        return self.visited
-
-    def newHeight(self, height):
-        self.height = height
-
-    def newVisit(self, visited):
         self.visited = visited
 
 

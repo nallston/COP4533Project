@@ -1,16 +1,4 @@
-import time
-import BFM
 import Grid
-
-
-
-MaxX = 100
-MaxY = 100
-MaxHeight = 25
-GridSize = 0
-# -1 height for unused location
-EmptyVertex = Grid.Vertex(-1, -1, -1, False)
-Nodes = [[EmptyVertex for x in range(MaxY)] for y in range(MaxY)]
 
 def ImportGridSize(Line1):
     Line1.strip(" ")
@@ -32,11 +20,10 @@ def ImportGridSize(Line1):
     GridSize.append(int(x))
     GridSize.append(int(y))
     print(x + " + " + y + "Grid Lines = " + str(int(x) * int(y)))
-    File.close()
     return GridSize
 
 
-def ImportGrid(line):
+def ImportGrid(line, Nodes):
     x = ""
     y = ""
     height = ""
@@ -88,44 +75,4 @@ print("Main program")
 TestCases/Example1/grid.txt
 TestCases/TestCase1/grid.txt
 TestCases/TestCase2/grid.txt
-
 """
-File = open("TestCases/TestCase1/grid.txt", "r")
-Lines = File.readlines()
-
-GridSize = ImportGridSize(Lines[0])
-StationsToVisit = []
-
-iLine = 1
-while iLine <= GridSize[0]:
-    line = Lines[iLine]
-    line = line.replace(" ", "")
-    line = line.replace("\n", "")
-    ImportGrid(line)
-    iLine += 1
-
-StationsToVisit.append(ImportStations(Lines[iLine]))
-iLine += 1
-
-while iLine < len(Lines):
-    line = Lines[iLine]
-    StationsToVisit.append(ImportStations(line))
-    iLine += 1
-
-StartStation = StationsToVisit[0]
-newGrid = Grid.Grid(GridSize[1], GridSize[2], Nodes, StartStation)
-i3 = 0
-while i3 < len(StationsToVisit):
-    print(StationsToVisit[i3].x, StationsToVisit[i3].y,StartStation.height, StationsToVisit[i3].visited)
-    i3 += 1
-
-distance1 = BFM.BFM(newGrid, StationsToVisit[0], StationsToVisit[1])
-print("Back to main:", distance1)
-distance2 = BFM.BFM(newGrid, StationsToVisit[0], StationsToVisit[2])
-print("Back to main:", distance2)
-
-if distance1 < distance2:
-    distance = distance1 + BFM.BFM(newGrid, StationsToVisit[1], StationsToVisit[2])
-else:
-    distance = distance1 + BFM.BFM(newGrid, StationsToVisit[2], StationsToVisit[1])
-print(distance)
